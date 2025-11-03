@@ -1,0 +1,119 @@
+
+.containerCenter{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--corDeFundo);
+}
+
+
+.logoTotal{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: sans-serif;
+    font-size: 35px;
+}
+
+.p{
+    color: red;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    font-size: 45px;
+}
+
+.h1{
+    color: white;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 18px
+}
+
+.login{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    width: 600px;
+
+}
+
+
+
+.formulario{
+    color: white;
+    padding-bottom: 16px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    gap: 18px;
+}
+
+
+.input{
+    height: 40px;
+    border: 1px solid rgb(146, 146, 146);
+    padding: 0 16px;
+    border-radius: 4px;
+    background-color: var(--corDeFundo);
+    color: white;
+    font-size: 16px;
+}
+
+.input::placeholder{
+color: rgba(255, 255, 255, 0.705);
+}
+
+.acessar{
+    height: 40px;
+    font-size: 16px;
+    background-color: rgb(231, 14, 14);
+    border: 0;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300ms ease-in;
+    
+}
+
+
+.acessar:hover{
+    background-color: darkred;
+}
+
+.link{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+}
+
+
+.links:hover{
+    color: red;
+}
+
+
+
+
+@media (max-width:620px){
+    .login{
+        width: 90%;
+    }
+
+}

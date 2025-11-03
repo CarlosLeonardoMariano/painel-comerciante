@@ -1,0 +1,298 @@
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.botaoNovo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  svg {
+    stroke-width: 2;
+  }
+}
+
+.tabelaContainer {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+
+  thead {
+    background-color: #f8f9fa;
+  }
+
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+      border-right: 1px solid #ccc;
+
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.9rem;
+    
+  }
+
+  th {
+    font-weight: 600;
+    color: #495057;
+    user-select: none;
+  }
+
+  tbody tr:hover {
+    background-color: #f1f3f5;
+  }
+
+  tbody td {
+    vertical-align: middle;
+  }
+}
+
+.mensagemNenhumProduto {
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+  color: #888;
+}
+
+.buttonTrash {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+
+  &:hover {
+    background-color: #e6c2c2;
+    color: #212529;  
+    transform: scale(1.2);
+
+  }
+}
+
+  .buttonAtualiza{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+
+  &:hover {
+    background-color: #bcb1f7;
+    color: #212529;  
+    transform: scale(1.2);
+
+  }
+   svg {
+    stroke-width: 1.8;
+  }
+
+}
+
+ /* === Modal Overlay === */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.55); /* fundo translúcido */
+  backdrop-filter: blur(10px) saturate(140%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  padding: 1.5rem;
+  animation: fadeOverlay 0.25s ease-in;
+}
+
+/* === Modal Box === */
+.modal {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 720px;
+  width: 100%;
+  padding: 2.8rem 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: fadeInScale 0.35s ease forwards;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Detalhe superior em gradiente */
+.modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* === Título === */
+.modal h2 {
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+/* === Form Grid === */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 1.25rem;
+}
+
+/* Inputs, Selects e Textareas */
+.formGrid input,
+.formGrid select,
+.formGrid textarea {
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 12px;
+  color: #374151;
+  background: #f9fafb;
+  transition: all 0.25s ease;
+  font-weight: 500;
+}
+
+.formGrid input:focus,
+.formGrid select:focus,
+.formGrid textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+/* Select estilizado */
+.formGrid select {
+  appearance: none;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg fill='%236b7280' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
+    no-repeat right 0.9rem center/1rem 1rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Textarea full width */
+.formGrid textarea {
+  grid-column: span 2;
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* === Botões === */
+.modalBotoes {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modalBotoes button {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+/* Cancelar */
+.modalBotoes .cancelar {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.modalBotoes .cancelar:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+/* Salvar */
+.modalBotoes .salvar {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.modalBotoes .salvar:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  transform: translateY(-2px);
+}
+
+/* === Animações === */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === Responsivo === */
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 1.8rem 1.5rem;
+    border-radius: 16px;
+  }
+}

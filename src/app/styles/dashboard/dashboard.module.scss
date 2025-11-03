@@ -1,0 +1,1335 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f1f5f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+// Sidebar fixa
+.sidebar {
+  width: 270px;
+  background-color: #1E3A8A;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+
+  .h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    .navLink {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .navIcon {
+        width: 20px;
+        height: 20px;
+        color: inherit;
+      }
+    }
+  }
+}
+
+// Conteúdo principal
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #f9fafb;
+  //padding: 2rem;
+}
+
+// Cabeçalho com nome do comércio e logo alinhados no topo
+.cabeca {
+  display: flex;
+  align-items: flex-start;  // Alinha pelo topo
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.5rem 2rem 1rem 2rem; // Menos espaço em cima, mais em baixo
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 10;
+  z-index: 10;
+  width: 100%;
+  
+
+  h1 {
+    font-size: 1.8rem;
+    color: #1E3A8A;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+    padding-top: 1.5rem; // Pequeno espaçamento para melhor alinhamento
+    text-transform: uppercase;
+  }
+
+  .imageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+
+    .commerceImage {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #1E3A8A;
+      margin-top: 0;
+    }
+
+    .noImage {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-size: 0.75rem;
+      margin-top: 0;
+    }
+
+    .uploadLabel {
+      font-size: 0.7rem;
+      color: #1E3A8A;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .hiddenInput {
+      display: none;
+    }
+  }
+}
+
+// Cards
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-right: 30px;
+        cursor: pointer;
+
+
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(13, 146, 13);
+    color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    text-transform: uppercase;
+    justify-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    .h3Vendas{
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0;
+    }
+  }
+
+
+  .card1 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #1d4ed8;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    text-transform: uppercase;
+    justify-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    .h3Pedidos{
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0;
+    }
+  }
+
+  .card2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(209, 21, 21);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    text-transform: uppercase;
+    justify-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    .h3Clientes{
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0;
+    }
+  }
+
+
+
+    h3 {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-top: 0.3rem;
+      color: #ffffff;
+    }
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      color: white;
+    }
+  }
+
+
+// Relatório
+.report {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #1E3A8A;
+  }
+
+  .placeholder {
+    height: 200px;
+    background-color: #e2e8f0;
+    border-radius: 6px;
+  }
+}
+
+// Topbar (boas-vindas)
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  width: 100%;
+.userProfile {
+  padding-left: 2rem;
+  color: #1E3A8A;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.userInfo {
+  font-size: 1rem;
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+
+  p {
+    margin: 0.3rem 0;
+    line-height: 1.4;
+  }
+
+  strong {
+    color: #2563eb;
+    font-weight: 600;
+  }
+
+  span {
+    color: #1f2937;
+    font-weight: 500;
+  }
+}
+
+
+  .logout{
+    color: red;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &:hover{
+    transform: scale(1.2);
+
+    }
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+.searchWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  padding: 12px 40px 12px 12px; /* espaço para o ícone */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-90%);
+  color: #888;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+/* Ícone visível apenas se o input estiver vazio */
+.searchInput:placeholder-shown + .searchIcon {
+  opacity: 1;
+}
+
+/* Ícone invisível quando o input tem valor */
+.searchInput:not(:placeholder-shown) + .searchIcon {
+  opacity: 0;
+}
+
+
+.clientesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clienteItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.detalhesBtn {
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.detalhesBtn:hover {
+  background: #096dd9;
+}
+
+.fecharBtn {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full screen */
+  background-color: #ffffff; /* fundo branco puro */
+  display: flex;
+  align-items: flex-start; /* topo da tela */
+  justify-content: center;
+  padding: 0;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.modalContent {
+  width: 100%;
+  height: 100vh; /* full screen */
+  padding: 40px 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+}
+
+.botaoFecharModal2 {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #ff4d4f;  /* vermelho profissional */
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.6s;
+  
+}
+
+.botaoFecharModal2:hover {
+  background-color: #d9363e;
+  transform: scale(1.3);
+}
+
+
+.botaoFecharModal {
+  width: 50px;             /* maior tamanho */
+  height: 50px;
+  border-radius: 50%;      /* deixa totalmente redondo */
+  background-color: #ff4d4f;  /* vermelho profissional */
+  color: #fff;
+  border: none;
+  font-size: 2rem;         /* ícone maior */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.botaoFecharModal:hover {
+  background-color: #d9363e; /* hover suave */
+  transform: scale(1.1);     /* leve efeito de aumento ao passar o mouse */
+}
+
+.modalTitle {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e3a8a; // Azul mais elegante
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #e5e7eb; // linha sutil abaixo do título
+  padding-bottom: 0.5rem;
+
+ 
+}
+
+.clienteInfo {
+  background: #eceef1; // fundo bem leve para destacar
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  
+
+&:hover {
+  transform: translateY(-4px);
+
+}
+  p {
+    font-size: 1rem;
+    color: #374151;
+    margin: 8px 0;
+    line-height: 1.5;
+
+    strong {
+      color: #111827; // destaque sutil
+      font-weight: 600;
+    }
+  }
+}
+
+
+.resumoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.resumoGrid div {
+  padding: 60px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+  &:hover {
+  transform: translateY(-4px);
+  transition: all ease-in-out 0.3s;
+cursor: pointer;
+}
+}
+
+.cardGreen { background-color: #449f16; color: #fff;  }
+.cardYellow { background-color: #021e5d; color: #ffffff; }
+.cardBlue { background-color: #1890ff; color: #fff; }
+.cardRed { background-color: #ff4d4f; color: #fff; }
+
+
+.listaPedidos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr);
+  width: 100vw;   // ocupa toda a largura da viewport
+  height: 100vh;  // ocupa toda a altura da viewport
+  background: rgba(255, 255, 255, 0.97); // leve transparência
+  backdrop-filter: blur(8px);  // desfoque do fundo
+  overflow-y: auto;
+  padding: 40px 30px;
+  box-sizing: border-box;
+  z-index: 9999;  // bem acima de tudo
+  
+  gap: 20px;
+  font-family: 'Poppins', sans-serif; // ou a fonte do seu projeto
+}
+.pedidosGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; // espaçamento entre os cards
+}
+.semPedidos {
+  color: #ff0000;
+  font-style: italic;
+  margin: 10px 0 20px 0;
+  width: 100%;
+  max-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.topo {
+  grid-column: 1 / -1; // ocupa toda a largura da grid
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.listaPedidos h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+  border-bottom: 2px solid #0070f3; // cor destaque moderna
+  padding-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  
+}
+
+
+
+.botaoFechar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // animação ao clicar
+  &:active .iconeAnimado {
+    transform: scale(0.8) rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+  // animação ao passar o mouse
+  &:hover .iconeAnimado {
+    transform: rotate(90deg) scale(1.1);
+    transition: transform 0.3s ease;
+     transform: scale(1.8);
+
+  }
+}
+
+.iconeAnimado {
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+
+
+
+.pedidoCard {
+  border: 1px solid #e0e0e0;
+  padding: 20px 25px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.25s ease;
+  cursor: pointer;
+
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.3);
+  }
+
+
+
+
+  p {
+    margin: 6px 0;
+    font-size: 1rem;
+    color: #333;
+    strong {
+      color: #0070f3;
+    }
+  }
+}
+
+.listaPedidos button {
+  align-self: flex-end;
+  padding: 8px 18px;
+  background-color: #0070f3;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 7px rgba(0,112,243,0.5);
+
+  &:hover {
+    background-color: #005bb5;
+  }
+}
+
+
+.btnDetalhes {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnDetalhes:hover {
+  background-color: #0056b3;
+}
+
+.detalhesPedido {
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.filtros {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: #0808b3;
+    }
+  }
+  
+}
+
+
+
+
+
+/* Overlay do modal */
+.modalVendas {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Conteúdo do modal (100% da tela) */
+.modalContentVendas {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0; /* modal tela cheia */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+/* Cabeçalho */
+.modalHeaderVendas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.modalHeaderVendas h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.5px;
+}
+
+.botaoFecharModalVendas {
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.botaoFecharModalVendas:hover {
+  color: #111827;
+}
+
+/* Corpo do modal */
+.modalBodyVendas {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  background: #f9fafb;
+}
+
+/* Resumo em Cards */
+.resumoGridVendas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+/* Total em Vendas */
+.resumoCardVendas {
+  background: green;
+  border-radius: 14px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumoCardVendas:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.resumoCardVendas strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+.resumoCardVendas p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Pedidos Finalizados */
+.resumoCardFinalizado {
+  background: #007bff; // azul
+  border-radius: 14px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumoCardFinalizado:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.resumoCardFinalizado strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+.resumoCardFinalizado p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+
+
+
+/* Pedidos Cancelado */
+.resumoCardCancelado {
+  background: #cc0000; // azul
+  border-radius: 14px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumoCardCancelado:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.resumoCardCancelado strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+.resumoCardCancelado p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Ticket Médio */
+.resumoCardTicket {
+  background: orange;
+  border-radius: 14px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumoCardTicket:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.resumoCardTicket strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+.resumoCardTicket p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Maior Venda */
+.resumoCardMaiorVendas {
+  background: purple;
+  border-radius: 14px;
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resumoCardMaiorVendas:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.resumoCardMaiorVendas strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+.resumoCardMaiorVendas p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+
+/* Lista de Vendas */
+.listaVendas {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.listaVendas h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+/* Tabela */
+.listaVendas table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.listaVendas thead {
+  background: #f3f4f6;
+}
+
+.listaVendas th, 
+.listaVendas td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.listaVendas th {
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.listaVendas td {
+  color: #111827;
+}
+
+.listaVendas tbody tr:hover {
+  background: #f9fafb;
+  transition: background 0.2s;
+}
+
+
+
+// ... Código CSS anterior (mantido)
+
+// Responsividade
+@media (max-width: 900px) {
+  /* Adapta o layout para tablets/telas médias */
+  .sidebar {
+    width: 200px; /* Sidebar um pouco menor */
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  /* Adicione esta regra ao seu CSS para o container da tabela */
+.tableContainer {
+  /* No seu código, esta classe pode ser aplicada à .listaVendas */
+  overflow-x: auto; 
+  /* Adicione uma margem ou padding para evitar que a rolagem grude nas bordas */
+  padding-bottom: 10px; 
+}
+
+/* Garante que a tabela tenha um tamanho mínimo para acionar a rolagem no celular */
+  .listaVendas table {
+    min-width: 600px; /* Ajuste o valor conforme a necessidade de espaço dos seus dados */
+  }
+
+  /* --- Sidebar (Menu) --- */
+  .sidebar {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    flex-direction: row; /* Alinha o conteúdo horizontalmente */
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+    padding: 1rem 1rem;
+    overflow-x: auto; /* Permite rolagem horizontal se necessário */
+    height: fit-content;
+
+    .h2 {
+      display: none; /* Esconde o título da sidebar */
+    }
+
+    nav {
+      flex-direction: row; /* Links de navegação em linha */
+      gap: 0.5rem; /* Espaço menor entre links */
+      width: auto;
+
+      .navLink {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        white-space: nowrap; /* Impede a quebra de texto nos links */
+
+        .navIcon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  /* --- Conteúdo Principal (main) --- */
+  .main {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  /* --- Cabeçalho (Cabeca) --- */
+  .cabeca {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+    position: relative;
+    top: auto;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      font-size: 1.5rem;
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+
+    .imageWrapper {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .commerceImage,
+    .noImage {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* --- Cards de Resumo --- */
+  .cards {
+    grid-template-columns: 1fr; /* Um card por linha */
+    gap: 1rem;
+    margin-right: 0;
+  }
+
+  .cards .card,
+  .cards .card1,
+  .cards .card2 {
+    margin-left: 0;
+    padding: 1.5rem; /* Padding menor */
+    justify-content: space-between;
+    text-align: left;
+
+    h3, .h3Vendas, .h3Pedidos, .h3Clientes {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+  
+}
+
+
+// ... Seu código CSS principal ...
+
+// Responsividade
+@media (max-width: 900px) {
+/* Adapta o layout para tablets/telas médias */
+.sidebar {
+ width: 200px; /* Sidebar um pouco menor */
+ padding: 1.5rem 0.5rem;
+ }
+
+  /* Cards de Resumo Vendas */
+  .resumoGridVendas {
+    /* Permite 1 ou 2 colunas dependendo do espaço */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 650px) { /* Usei 650px para capturar tablets menores e celulares */
+ .dashboard {
+ flex-direction: column;
+ }
+
+  /* --- Sidebar (Menu) --- */
+.sidebar {
+position: relative;
+ width: 100%;
+ min-height: auto;
+flex-direction: row; 
+ justify-content: flex-start; 
+ padding: 1rem 1rem;
+ height: fit-content;
+    white-space: nowrap; /* Impede quebra de linha na sidebar inteira */
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
+
+ .h2 {
+ display: none; 
+ }
+
+ nav {
+ flex-direction: row; 
+gap: 0.5rem; 
+ width: auto;
+
+.navLink {
+ padding: 0.5rem 0.75rem;
+font-size: 0.8rem;
+ }
+}
+ }
+
+/* --- Conteúdo Principal (main) --- */
+ .main {
+ padding: 1rem;
+ gap: 1.5rem;
+ }
+
+ /* --- Cabeçalho (Cabeca) --- */
+.cabeca {
+ flex-direction: column;
+ align-items: center;
+ gap: 0.5rem;
+ padding: 0.5rem 1rem 1rem 1rem;
+ position: relative;
+ top: auto;
+ margin-bottom: 1.5rem;
+
+ h1 {
+ font-size: 1.5rem;
+text-align: center;
+padding-top: 0.5rem;
+      max-width: 100%;
+      white-space: normal;
+}
+
+ .imageWrapper {
+flex-direction: row;
+justify-content: center;
+ gap: 1rem;
+ margin-bottom: 1rem;
+ }
+
+ .commerceImage,
+ .noImage {
+ width: 50px;
+ height: 50px;
+ }
+ }
+
+/* --- Cards de Dashboard (.cards) --- */
+ .cards {
+ grid-template-columns: 1fr; /* Um card por linha */
+ gap: 1rem;
+ margin-right: 0;
+}
+
+ .cards .card,
+ .cards .card1,
+.cards .card2 {
+ margin-left: 0;
+ padding: 1.5rem; 
+ justify-content: space-between;
+ text-align: left;
+
+h3, .h3Vendas, .h3Pedidos, .h3Clientes {
+ font-size: 1.2rem;
+ }
+
+ p {
+font-size: 1.2rem;
+}
+ }
+
+  /* --- Modais (Geral) --- */
+  .modalContent,
+  .modalContentVendas {
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+  
+  .botaoFecharModal2 {
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  /* --- Lista de Clientes (Modal) --- */
+  .clienteItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  /* --- Grid de Resumo Clientes (Modal) --- */
+  .resumoGrid {
+    grid-template-columns: 1fr; /* Um card por linha */
+  }
+
+  .resumoGrid div {
+    padding: 30px;
+    font-size: 1rem;
+  }
+  
+  /* --- Modal Vendas --- */
+  .modalHeaderVendas {
+    padding: 1rem;
+  }
+  
+  .modalBodyVendas {
+    padding: 1rem;
+  }
+
+  .resumoGridVendas {
+    /* Força 1 coluna na maioria dos celulares */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* --- Tabela de Vendas (.listaVendas) --- */
+  .listaVendas {
+    padding: 1rem;
+    overflow-x: auto; /* Permite rolagem horizontal */
+  }
+
+  /* Força a tabela a ter uma largura mínima, permitindo rolagem */
+.listaVendas table {
+ min-width: 600px; 
+}
+  
+  /* Ajusta o padding para que as células caibam melhor */
+  .listaVendas th, 
+  .listaVendas td {
+    padding: 0.7rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}

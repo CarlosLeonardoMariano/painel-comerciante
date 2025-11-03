@@ -1,0 +1,161 @@
+.containerPrincipal {
+  display: flex;
+  flex-direction: column;
+  background-color: #0e0f2c;
+  height: 100vh;
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.conteudo {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.titulo {
+  position: relative;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #ffffff20;
+        transition: width 0.9s ease-out;
+
+  }
+
+   &:hover::after {
+    width: 0%;
+        transition: all 0.9s ease-in;
+
+  }
+}
+
+.alerta {
+  color: rgb(12, 183, 12);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.mensagem {
+  color: #ccc;
+  font-style: italic;
+}
+
+.listaCategorias {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.itemCategoria {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #1a1a40;
+  border-radius: 8px;
+  transition: background 0.3s;
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+
+  &:hover {
+    background-color: #272753;
+  }
+
+  .buttonTrash{
+    background-color: transparent;
+    border: none;
+    color: red;
+  }
+}
+
+/* Carregamento */
+.comercioIdCarregando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100vh;
+  background-color: #0e0f2c;
+  color: white;
+  font-size: 1.125rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  color: #ffffff;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #272753;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
+
+
+  &:hover {
+    background-color: #3a3a75;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.aberta {
+  transform: rotate(180deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

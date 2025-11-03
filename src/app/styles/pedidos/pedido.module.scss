@@ -1,0 +1,1299 @@
+/* ========================================================================= */
+/* --- 1. VARIÁVEIS E MIXINS GLOBAIS SCSS --- */
+/* ========================================================================= */
+
+// Cores (Baseadas na imagem do usuário)
+$color-main: #343a40;           // Texto principal (Preto/Cinza Escuro)
+$color-blue-dark: #007bff;      // Azul para destaque
+$color-secondary: #6c757d;      // Cinza (Datas, Labels, Ícones)
+$color-tag-primeiro: #dc3545;   // Vermelho do "Primeiro pedido" e Total
+$color-success-timeline: #28a745; // Verde da timeline (Recebido, Em preparo)
+$color-delivery-action: #ff6600; // Laranja do botão "Marcar" e Entregar
+$color-cancel-action: #dc3545;   // Vermelho de Cancelar
+$color-info-pronto: #17a2b8;    // Ciano (Pronto)
+$color-warning-preparo: #ffc107; // Amarelo (Em preparo/Pendente)
+
+// Cores de Fundo e Borda
+$bg-light: #f8f9fa;
+$bg-white: #ffffff;
+$color-border: #e9ecef;
+
+// Sombras
+$shadow-default: 0 4px 12px rgba(0, 0, 0, 0.1);
+$shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+// Transições
+$transition-default: all 0.2s ease-in-out;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Mixin para Centralização Flexbox --- */
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================================================================= */
+/* --- 2. LAYOUT PRINCIPAL E LISTA SIMPLIFICADA (PAINEL GERAL) --- */
+/* ========================================================================= */
+
+.container {
+    padding: 20px;
+    background-color: $bg-light;
+    min-height: 100vh;
+}
+
+.header {
+    @include flex-center(row);
+    justify-content: space-between;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid $color-border;
+}
+
+.titulo {
+    font-size: 2rem;
+    color: $color-main;
+    font-weight: 700;
+}
+
+.botaoResumo {
+    background-color: $color-blue-dark;
+    color: $bg-white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition-default;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: darken($color-blue-dark, 10%);
+    }
+}
+
+.emptyState {
+    @include flex-center(column);
+    text-align: center;
+    padding: 50px;
+    background-color: $bg-white;
+    border-radius: 8px;
+    margin-top: 50px;
+    box-shadow: $shadow-default;
+
+    .icon {
+        width: 80px;
+        height: 80px;
+        color: $color-secondary;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        color: $color-main;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        color: $color-secondary;
+    }
+}
+
+.botaoAudio {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    @include flex-center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: $transition-default;
+
+    &.somAtivo {
+        background-color: $color-success-timeline;
+        color: $bg-white;
+    }
+
+    &.somInativo {
+        background-color: $color-secondary;
+        color: $bg-white;
+
+        &:hover {
+            background-color: darken($color-secondary, 10%);
+        }
+    }
+}
+
+/* --- Lista Simples (Botões) --- */
+.listaSimples {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+}
+
+.pedidoBotaoCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-align: left;
+    transition: $transition-default;
+    background-color: $bg-white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid; 
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.pedidoNumeroSimples {
+    flex-shrink: 0;
+    color: $color-main;
+    font-weight: 700;
+    min-width: 150px;
+}
+
+.pedidoInfoSecundaria {
+    flex-grow: 1;
+    text-align: right; 
+    color: $color-secondary;
+    font-size: 1rem;
+    padding: 0 15px;
+}
+
+.statusTagSimples {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $bg-white; 
+}
+
+
+
+/* --- Mapeamento de Cores para o Card de Status (Borda e Tag) --- */
+
+.statusPendente {
+    border-left-color: $color-warning-preparo;
+    .statusTagSimples { background-color: $color-warning-preparo; }
+}
+.statusAceitar {
+    border-left-color: $color-success-timeline;
+    .statusTagSimples { background-color: $color-success-timeline; }
+}
+.statusEmPreparo {
+    border-left-color: #9c27b0;
+    .statusTagSimples { background-color: #9c27b0; }
+}
+.statusPronto {
+    border-left-color: $color-info-pronto;
+    .statusTagSimples { background-color: $color-info-pronto; }
+}
+.statusEntregar {
+    border-left-color: $color-delivery-action;
+    .statusTagSimples { background-color: $color-delivery-action; }
+}
+.statusCancelado {
+    border-left-color: $color-cancel-action;
+    .statusTagSimples { background-color: $color-cancel-action; }
+}
+.statusFinalizar {
+    border-left-color: $color-secondary;
+    .statusTagSimples { background-color: $color-secondary; }
+}
+
+
+
+
+
+.statusSpan {
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white; // use cor fixa se não tiver variável
+}
+
+/* Classes de cor específicas para o span */
+.statusSpanPendente { background-color: #ff9800; }
+.statusSpanAceitar { background-color: #4caf50; }
+.statusSpanEmPreparo { background-color: #9c27b0; }
+.statusSpanPronto { background-color: #2196f3; }
+.statusSpanEntregar { background-color: #00bcd4; }
+.statusSpanCancelado { background-color: #f44336; }
+.statusSpanFinalizar { background-color: #109104; }
+
+
+
+
+/* Container de Ações (Melhora o layout) */
+.divAlinhamento {
+    /* Garante que o container ocupe a largura total se necessário */
+    width: 100%;
+    /* Adiciona um pequeno espaçamento na parte superior */
+    padding-top: 50px; 
+    padding-bottom: 50px;
+    /* Centraliza os botões */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.actions {
+    /* Configura o display para os botões ficarem lado a lado */
+    display: flex;
+    /* Permite quebra de linha se a tela for pequena */
+    flex-wrap: wrap; 
+    /* Adiciona um pequeno gap entre os botões */
+    gap: 10px; 
+    /* Alinha os itens no centro */
+    align-items: center;
+}
+
+/* Estilo Base para Todos os Botões de Ação */
+.botao {
+    /* Formato de 'pílula' com cantos totalmente arredondados */
+    border-radius: 9999px;
+    width: 50px;
+    height: 50px; 
+    
+    /* Remove a borda padrão */
+    border: 1px solid transparent; 
+    
+    /* Padding generoso para o formato alongado */
+    padding: 10px 18px; 
+    
+    /* Fonte e cor padrão */
+    color: white; 
+    font-weight: 600; /* Semi-bold */
+    font-size: 14px;
+    
+    /* Garante alinhamento do ícone e texto */
+    display: flex;
+    align-items: center;
+    
+    /* Transição suave para efeitos de hover */
+    transition: all 0.2s ease-in-out;
+    
+    /* Cursor de clique */
+    cursor: pointer;
+}
+
+/* Espaçamento entre o ícone e o texto */
+.botao svg {
+    margin-right: 6px; 
+}
+
+/* Efeito de Hover (passar o mouse) */
+.botao:hover {
+    /* Escurece levemente a cor de fundo */
+    filter: brightness(90%); 
+}
+
+.btnmarcar{
+    background-color: #18b392;
+    color: white;
+    border: none;
+    padding: 5px 15px ;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.btnmarcarCancelado{
+     background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 15px ;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+/* Cores e Estilos Específicos */
+
+/* ACEITAR (Verde de sucesso) */
+.aceitar {
+    background-color: transparent;
+    border: 1px solid #18b392;
+}
+
+.aceitarVerde{
+background-color: #18b392;
+    border: 1px solid #18b392;
+
+}
+
+
+.marcarDesativado {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+/* PENDENTE (Amarelo de aviso) */
+.pendente {
+     background-color: transparent;
+    border: 1px solid #18b392;
+}
+
+.pendenteLaranja{
+     background-color: #18b392;
+    border: 1px solid #18b392;
+}
+
+.marcarDesativadoPendente{
+      opacity: 0.5;
+
+}
+
+/* EM PREPARO (Azul primário) */
+.emPreparo {
+  background-color: transparent;
+    border: 1px solid #18b392;
+}
+
+
+.preparoRoxo{
+     background-color: #18b392;
+    border: 1px solid #18b392;
+}
+
+.marcarDesativadoPreparo{
+     opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+
+.cancelado {
+    background-color: transparent;
+        border: 1px solid #b71c1c !important;
+
+}
+.canceladoVermelho {
+  background-color: #b71c1c !important;
+  border-color: #b71c1c !important;
+}
+
+.marcarDesativadoCancelado {
+  opacity: 0.5;
+}
+
+
+/* FINALIZAR (Preto/Cinza para conclusão) */
+.finalizar {
+     background-color: transparent;  
+     border: 1px solid #18b392;
+
+}
+
+.finalizadoVerde{
+    background-color:#18b392;
+    border: 1px solid #18b392;
+
+}
+
+.marcarDesativadoFinalizado {
+    opacity: 0.5;
+}
+
+
+
+
+
+.pronto {
+     background-color: transparent;  
+     border: 1px solid #18b392;
+
+}
+
+.prontoAzul{
+     background-color:#18b392;
+    border: 1px solid #18b392;
+}
+.marcarDesativadoPronto{
+    opacity: 0.5;
+}
+
+
+/* ENTREGAR (Azul claro ou um tom de laranja para entrega) */
+.entregar {
+         background-color: transparent;
+    border: 1px solid #18b392;
+}
+
+
+.entregaAzul{
+    background-color: #18b392;
+    border: 1px solid #18b392;
+}
+
+.marcarDesativadoEntrega{
+    opacity: 0.5;
+}
+
+
+
+/* Estilo base para todos os spans abaixo dos botões */
+.btn-label {
+  margin-top: 6px;            /* Espaço entre o botão e o texto */
+  font-size: 0.9rem;          /* Um tamanho discreto e legível */
+  font-weight: 600;            /* Um pouco mais de destaque */
+  color: #18b392;              /* Tom neutro, combina com cores do botão */
+  text-align: center;          /* Centraliza o texto */
+  text-transform: uppercase;   /* Maiúsculas, estilo moderno */
+  letter-spacing: 0.5px;       /* Espaçamento entre letras */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Efeito hover no botão altera levemente o span */
+.btnmarcar:hover + .btn-label,
+.btnmarcar:focus + .btn-label {
+  color: #18b392;              /* Combina com verde de aceito */
+  transform: translateY(-2px); /* Pequeno movimento pra feedback visual */
+}
+
+
+
+
+
+/* ========================================================================= */
+/* --- 3. MODAL/CARD DE DETALHES (Estilo da Imagem FIEL) --- */
+/* ========================================================================= */
+
+.modalDetalhesContent {
+  position: fixed; /* <- fixa o modal na tela toda */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.75); /* fundo escurecido */
+  z-index: 1050;
+background-color: $bg-white;
+  /* conteúdo interno do modal */
+  .modalDetalhesBox {
+    background-color: #fff;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 25px;
+    border-radius: 12px;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .modalDetalhesTitulo{
+    padding-left: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+
+
+
+
+.modalDetalhesHeader{
+    background-color: #f3f3f3;
+    margin: -25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.h4detalhes{
+    font-size: 20px;
+    font-weight: 500;
+        font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.pTel{
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Header e Info do Cliente (Superior Esquerda) --- */
+.cardHeaderDetalhes {
+    padding-bottom: 10px;
+
+    .infoCliente {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 10px;
+
+        h2 { // Nome do Cliente
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: $color-main;
+        }
+
+        .primeiroPedidoTag {
+            background-color: $color-tag-primeiro;
+            color: $bg-white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .telefone {
+            font-size: 1rem;
+            color: $color-secondary;
+        }
+    }
+
+    .infoPedido {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+        border-bottom: 1px solid $color-border;
+        padding-bottom: 15px;
+
+        .numeroPedido {
+            font-size: 1rem;
+            color: $color-main;
+            font-weight: 500;
+
+            strong {
+                font-weight: 700;
+                color: $color-tag-primeiro; 
+            }
+        }
+        .cpfNota {
+            font-size: 0.9rem;
+            color: $color-secondary;
+        }
+    }
+}
+
+/* --- Linha de Ações/Icones (Superior Direita) --- */
+.botoesContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+
+    button {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        border: 1px solid $color-border;
+        background-color: $bg-white;
+        @include flex-center;
+        cursor: pointer;
+        transition: $transition-default;
+        color: $color-secondary;
+
+        &:hover {
+            background-color: $bg-light;
+            color: $color-blue-dark;
+        }
+        
+        &.activeButton { // Para destacar o botão de motoboy, por exemplo
+            background-color: $color-delivery-action;
+            color: $bg-white;
+            border-color: $color-delivery-action;
+        }
+    }
+}
+
+
+/* --- Timeline de Status (O Coração da Imagem) --- */
+.statusTimeline {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    position: relative;
+    border-bottom: 1px solid $color-border;
+
+    .statusStep {
+        @include flex-center(column);
+        text-align: center;
+        width: 20%;
+        position: relative;
+        z-index: 2;
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid $color-secondary;
+            background-color: $bg-white;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            font-size: 0.9rem;
+            color: $color-main;
+            font-weight: 500;
+        }
+
+        .time {
+            font-size: 0.8rem;
+            color: $color-secondary;
+            margin-bottom: 5px;
+        }
+
+        .botaoMarcar {
+            background-color: $color-delivery-action;
+            color: $bg-white;
+            padding: 4px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: $transition-default;
+            
+            &:disabled {
+                background-color: $color-secondary;
+                cursor: not-allowed;
+            }
+        }
+
+        /* Estilos de Estado */
+        &.completed {
+            .circle {
+                background-color: $color-success-timeline;
+                border-color: $color-success-timeline;
+            }
+        }
+        
+        &.active { // Próximo estado a ser marcado
+             .circle {
+                border-color: $color-delivery-action; 
+            }
+        }
+        
+        &.cancelled { // Estado cancelado
+            .circle {
+                border-color: $color-cancel-action;
+            }
+        }
+    }
+}
+
+
+/* --- Conteúdo Principal (Endereço, Mapa, Pagamento) --- */
+.mainContentGrid {
+    display: grid;
+    grid-template-columns: 3fr 2fr; 
+    gap: 30px;
+    margin-bottom: 30px;
+
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.enderecoDetalhes {
+    font-size: 1rem;
+    color: $color-main;
+    line-height: 1.6;
+    
+    & > div { // Linhas principais: Rua, Bairro, Cidade
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    span { // Linhas secundárias: Complemento, Ponto de Referência
+        display: block;
+        font-weight: 500;
+        color: $color-secondary;
+    }
+}
+
+.mapaPagamento {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mapaPlaceholder {
+    width: 100%;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    @include flex-center;
+    border: 1px solid $color-border;
+    position: relative; 
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .iconLupa {
+        width: 50px;
+        height: 50px;
+        color: $color-secondary;
+        border: 1px solid $color-secondary;
+        border-radius: 50%;
+        padding: 5px;
+        background-color: rgba($bg-white, 0.8);
+        position: absolute;
+    }
+}
+
+.resumoFinanceiro {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; 
+}
+
+.financeCard {
+    background-color: $bg-white;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    flex: 1 1 30%; 
+    min-width: 120px;
+
+    &.total {
+        background-color: $color-tag-primeiro; 
+        color: $bg-white;
+        font-weight: 700;
+        flex: 1 1 40%; // Faz o card do total maior, como na imagem
+    }
+    
+    .valor {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: $color-main;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .label {
+        font-size: 0.85rem;
+        color: $color-secondary;
+        display: block;
+    }
+
+    &.total {
+        .valor, .label {
+            color: $bg-white;
+        }
+    }
+    
+    // Estilos específicos para o cartão de Forma de Pagamento
+    .formaPagamento {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $color-blue-dark;
+        margin-top: 5px;
+    }
+}
+
+
+/* --- Tabela de Itens (Rodapé do Card) --- */
+.tabelaItens {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-top: 20px;
+
+    th, td {
+        padding: 10px 15px;
+        text-align: left;
+        border-bottom: 1px solid $color-border;
+    }
+
+    th {
+        background-color: $bg-light;
+        color: $color-secondary;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+
+    td {
+        color: $color-main;
+        
+        &:last-child {
+            font-weight: 700; // Coluna Total com valor em negrito
+            text-align: right;
+        }
+        
+        &.descricao {
+            color: $color-secondary;
+            font-size: 0.95rem;
+        }
+    }
+
+    .valorTotalItem {
+        font-weight: 700;
+        text-align: right;
+        min-width: 80px;
+    }
+}
+
+/* ========================================================================= */
+/* --- 4. MODAIS SECUNDÁRIOS (Motoboy / Resumo) --- */
+/* ========================================================================= */
+
+
+
+
+
+
+/* Overlay escuro */
+.modal1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOverlay 0.3s ease-out;
+  z-index: 9999;
+}
+
+/* Conteúdo do modal */
+.modalMotoboy {
+  background-color: #ffffff;
+  width: 100vw !important;   /* 🔹 ocupa toda a largura da janela */
+  height: 100vh !important;  /* 🔹 ocupa toda a altura da janela */
+  max-width: none !important; /* 🔹 remove o limite anterior */
+  max-height: none !important;
+  padding: 30px;
+  border-radius: 0;          /* 🔹 se quiser tirar o arredondamento */
+  box-shadow: none;          /* 🔹 remove a sombra se quiser tela cheia */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+
+/* Título */
+.modalMotoboy h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+/* Lista de motoboys */
+.listaMotoboys {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Cartão individual */
+.cardMotoboy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fafafa;
+
+  &:hover {
+    background-color: #18b39215;
+    transform: scale(1.02);
+  }
+}
+
+/* Botão cancelar */
+.botaoCancelar1 {
+  margin-top: 25px;
+  background-color: #d32f2f;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgb(224, 212, 212);
+    color: #fff;
+  }
+}
+
+/* Animações */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Overlay do modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); // fundo escuro semi-transparente
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+/* Conteúdo do modal */
+.modalContent {
+  background-color: #ffffff;
+  width: 100%;      // ocupa 100% da largura da tela
+  height: 100vh;    // ocupa 100% da altura da tela
+  max-width: 100%; // opcional: limita a largura em telas grandes
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;  // scroll se conteúdo ultrapassar a altura
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;  // sem cantos arredondados
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Header do modal */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modalHeader h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin: 0;
+}
+
+
+.botaoFecharModal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-secondary;
+    transition: color 0.2s;
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    background-color: #dc3545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: white;
+    &:hover {
+        color: $bg-white;
+        background-color: #af0314;
+    }
+}
+
+
+.botaoCancelar, .botaoCancelar1 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-cancel-action;
+    transition: color 0.2s;
+    font-weight: 600;
+    
+    &:hover {
+        color: darken($color-cancel-action, 10%);
+    }
+}
+
+
+
+/* Tabela do resumo */
+.tableContainer {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.tabelaResumo {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabelaResumo th,
+.tabelaResumo td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.tabelaResumo th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabelaResumo tr:hover {
+  background-color: #f0f8ff;
+}
+
+
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+
+
+
+
+
+.relogio {
+  background-color: $color-info-pronto;
+  padding: 8px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.labelHora {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.hora {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+
+.botaoWhatsApp{
+    background-color: #28a745;
+    width: 60px;
+    height: 60px;
+    border: 0;
+    border-radius: 8px;
+
+    &:hover{
+    background-color: #109104;
+
+    }
+}
+
+.botaoImpressora{
+    background-color: #1884cb;
+    width: 60px;
+    height: 60px;
+    border: 0;
+    border-radius: 8px;
+
+    &:hover{
+    background-color: #096aab;
+
+    }
+}
+
+/* --- Modal Motoboy --- */
+.modalMotoboy {
+    @extend .modalContent;
+    width: 350px;
+
+    h3 {
+        text-align: center;
+    }
+}
+
+.semMotoboy {
+    text-align: center;
+    color: $color-cancel-action;
+    padding: 20px;
+    border: 1px dashed $color-cancel-action;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.listaMotoboys {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .cardMotoboy {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 15px;
+        background-color: $bg-light;
+        border-radius: 6px;
+        border-left: 4px solid $color-delivery-action;
+        cursor: pointer;
+        transition: $transition-default;
+
+        &:hover {
+            background-color: #e9ecef;
+        }
+
+        .motoboyInfo {
+            display: flex;
+            flex-direction: column;
+            
+            .nome {
+                font-weight: 600;
+                color: $color-main;
+            }
+            .status {
+                font-size: 0.9rem;
+                color: $color-secondary;
+            }
+        }
+
+        .selecionar {
+            color: $color-delivery-action;
+            font-weight: 700;
+        }
+    }
+}
+
+/* --- Tabela de Resumo --- */
+.tableContainer {
+    max-height: 50vh;
+    overflow-y: auto;
+    border: 1px solid $color-border;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.tabelaResumo {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid $color-border;
+    }
+
+    th {
+        background-color: $color-blue-dark;
+        color: $bg-white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+}
+
+.tabelaResumo button {
+    background-color: $color-cancel-action;
+    padding: 8px 12px;
+    color: $bg-white;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($color-cancel-action, 10%);
+    }
+}
